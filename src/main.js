@@ -42,7 +42,7 @@ function checkCurrencyfor1() {
     if (selectedCurrency1 == selectedCurrency2) {
         amount1.value = amount2.value;
     }
-    askServer2
+    askServer2();
 }
 function checkCurrencyfor2() {
     let amount1 = document.querySelector('.card1 input');
@@ -62,7 +62,7 @@ function checkCurrencyfor2() {
     if (selectedCurrency1 == selectedCurrency2) {
         amount2.value = amount1.value;
     }
-    askServer1
+    askServer1();
 }
 
 input.addEventListener('keyup', askServer1);
@@ -71,6 +71,7 @@ output.addEventListener('keyup', askServer2);
 function askServer1() {
     let amount1 = document.querySelector('.card1 input');
     let amount2 = document.querySelector('.card2 input');
+
     let selectedCurrency1 = document.querySelector('.card1 .selected');
     if (selectedCurrency1.innerHTML.length == 3) {
         selectedCurrency1 = selectedCurrency1.innerHTML;
