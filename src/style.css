@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body, html, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    height: 50px;
+    padding: 0 20px;
+    background: #F5F5F6;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+    header img {
+        height: 23px;
+    }
+
+    header div {
+        display: flex;
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 13px;
+        letter-spacing: 0.06em;
+        color: #959BA4;
+    }
+
+    header div p {
+        margin-left: 20px;
+    }
+
+    header div p:first-child {
+        margin-left: 0;
+        color: black;
+    }
+
+    header button {
+        font-family: Roboto;
+        font-style: normal;
+        font-size: 11px;
+        line-height: 13px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.06em;
+        font-weight: 500;
+        width: 58px;
+        height: 33px;
+        background: #FFFFFF;
+        border-radius: 4px;
+        border: 0;
+        justify-content: center;
+    }
+
+    header div p:hover, header button:hover {
+        cursor: pointer;
+    }
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+    main .container {
+        width: 641px;
+        margin-top: 56px;
+    } 
+
+    .container h1 {
+        margin: 0;
+        padding: 0;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .cards img {
+            align-self: flex-end;
+            margin-bottom: 37px;
+        }
+
+        .cards img:hover {
+            cursor: pointer;
+        }
+
+    .card1, .card2 {
+        width: 260px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .card1 p:first-child, .card2 p:first-child {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        color: #9F9F9F;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        margin-top: 28px;
+        margin-bottom: 1px;
+    }
+
+    .currency {
+        display: flex;
+    }
+
+    .currency button, .currency select {
+        width: 52px;
+        height: 30px;
+        font-family: Roboto;
+        font-style: normal;
+        justify-content: center;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #C6C6C6;
+        background-color: transparent;
+        border: 1px solid #E5E5E5;
+    }
+
+    .currency button:hover, .currency select:hover {
+        cursor: pointer;
+    }
+
+    .currency button:nth-child(even) {
+        border-left: none;
+        border-right: none;
+    }
+
+    .currency button:first-child {
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+    
+    .currency .selected {
+        background-color: #833AE0;
+        color: white;
+    }
+
+    .currency select {
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    .currency select option {
+        color: black;
+        background-color: white;
+    }
+
+    .input-output {
+        width: 100%;
+        margin-top: 20px;
+        border: 1px solid #E5E5E5;
+        border-radius: 3px;
+        padding: 11px 14px 5px 14px;
+    }
+
+    .input-output input, .input-output .output {
+        width: 98%;
+        height: 38px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 42px;
+        border: none
+    }
+
+    .input-output p {
+        height: 28px;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        color: #C6C6C6;
+        margin-top: 20px;
+    }
