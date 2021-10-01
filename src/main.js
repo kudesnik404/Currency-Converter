@@ -33,6 +33,16 @@ input.addEventListener('keyup', askServer);
 convertButton.addEventListener('click', changePlaces);
 
 function askServer() {
+
+    let loadingScreen = document.querySelectorAll('.noloading, .loading')[0];
+    loadingScreen.classList.add('noloading');
+    loadingScreen.classList.remove('loading');
+    let timeOut = setTimeout(showLoadingScreen, 500);
+            function showLoadingScreen() { 
+                loadingScreen.classList.remove('noloading');
+                loadingScreen.classList.add('loading');
+            } 
+
     input.value = input.value.replace((/\s/g), '');
     
     let selectedCurrency1 = document.querySelector('.card1 .selected');
@@ -51,7 +61,6 @@ function askServer() {
        output.value = input.value;
        inputInfo.innerHTML = `${input.value} ${selectedCurrency1} = ${output.value} ${selectedCurrency2}`;
        outputInfo.innerHTML = inputInfo.innerHTML;
-
     } else {
         if (isNaN(+(input.value.replace((/,/g), '.')))) {
             input.value = 'не число';
@@ -61,7 +70,8 @@ function askServer() {
         } else {   
             if (/(,|\.)$/.test(input.value)) {
                 return
-            }
+            }       
+
             fetch(`https://api.exchangerate.host/convert?from=${selectedCurrency1}&to=${selectedCurrency2}&amount=${(input.value.replace((/,/g), '.'))}`)
                 .then ((res) => {
                     return res.json()
@@ -70,9 +80,12 @@ function askServer() {
                     output.value = data.result;
                     output.value = new Intl.NumberFormat().format(output.value);
                     input.value = new Intl.NumberFormat().format((input.value.replace((/,/g), '.')));
+                    clearTimeout(timeOut);
+                    loadingScreen.classList.add('noloading');
+                    loadingScreen.classList.remove('loading');
                 })
                 .catch ((err) => {
-                    console.log(err)
+                    alert(`Невозможно загрузить страницу. Ошибка ${err}`)
                 })
             fetch(`https://api.exchangerate.host/convert?from=${selectedCurrency1}&to=${selectedCurrency2}&amount=1`)
                 .then ((res) => {
@@ -92,6 +105,8 @@ function askServer() {
 function changePlaces() {
     let selCur1 = document.querySelector('.card1 .selected');
     let selCur2 = document.querySelector('.card2 .selected');
+    let curOption1 = document.querySelector('.card1 select');
+    let curOption2 = document.querySelector('.card2 select');
 
     if (selCur1.innerHTML.length == 3) {
         selCur1 = selCur1.innerHTML;
@@ -104,14 +119,12 @@ function changePlaces() {
         selCur2 = selCur2.value;
     }
 
+    if (((selCur1 == 'RUB')||(selCur1 == 'USD')||(selCur1 == 'EUR')||(selCur1 == 'GBP'))&&((selCur2 == 'RUB')||(selCur2 == 'USD')||(selCur2 == 'EUR')||(selCur2 == 'GBP'))) {
     currencyButtonInput.forEach((element) => {
         element.classList.remove('selected');
         if (element.innerHTML == selCur2) {
             element.classList.add('selected');
             askServer()  
-        } else if (element.value == selCur2) {
-            element.classList.add('selected')
-            askServer()
         } else {
             element.classList.remove('selected');
         }
@@ -121,13 +134,53 @@ function changePlaces() {
         if (element.innerHTML == selCur1) {
             element.classList.add('selected');
             askServer()  
-        } else if (element.value == selCur1) {
-            element.classList.add('selected')
-            askServer()
         } else {
             element.classList.remove('selected');
         }
     })
+    } else if (((selCur1 == 'RUB')||(selCur1 == 'USD')||(selCur1 == 'EUR')||(selCur1 == 'GBP'))&&((selCur2 != 'RUB')||(selCur2 != 'USD')||(selCur2 != 'EUR')||(selCur2 != 'GBP'))) {
+        currencyButtonInput.forEach((element) => {
+            element.classList.remove('selected');
+        })
+        currencyButtonOutput.forEach((element) => {
+            element.classList.remove('selected');
+        })
+        curOption1.value = selCur2;
+        curOption1.classList.add('selected');
+        currencyButtonOutput.forEach((element) => {
+            if (element.innerHTML == selCur1) {
+                element.classList.add('selected');
+            }
+        })
+        askServer()
+    } else if (((selCur1 != 'RUB')||(selCur1 != 'USD')||(selCur1 != 'EUR')||(selCur1 != 'GBP'))&&((selCur2 == 'RUB')||(selCur2 == 'USD')||(selCur2 == 'EUR')||(selCur2 == 'GBP'))) {
+        currencyButtonInput.forEach((element) => {
+            element.classList.remove('selected');
+        })
+        currencyButtonOutput.forEach((element) => {
+            element.classList.remove('selected');
+        })
+        curOption2.value = selCur1;
+        curOption2.classList.add('selected');
+        currencyButtonInput.forEach((element) => {
+            if (element.innerHTML == selCur2) {
+                element.classList.add('selected');
+            }
+        })
+        askServer()
+    } else if (((selCur1 != 'RUB')||(selCur1 != 'USD')||(selCur1 != 'EUR')||(selCur1 != 'GBP'))&&((selCur2 != 'RUB')||(selCur2 != 'USD')||(selCur2 != 'EUR')||(selCur2 != 'GBP'))) {
+        currencyButtonInput.forEach((element) => {
+            element.classList.remove('selected');
+        })
+        currencyButtonOutput.forEach((element) => {
+            element.classList.remove('selected');
+        })
+        curOption1.value = selCur2;
+        curOption2.value = selCur1;
+        curOption1.classList.add('selected');
+        curOption2.classList.add('selected');
+        askServer()
+    }
 }
 
 })

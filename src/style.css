@@ -197,3 +197,38 @@ main {
         color: #C6C6C6;
         margin-top: 20px;
     }
+
+    .noloading {
+        display: none;
+    }
+
+    .loading {
+        display: flex;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+    }
+
+    .loading div:first-child {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.44);
+    }
+
+    .loading div:last-child {
+        position: relative;
+        display: flex;
+        width: 129px;
+        height: 54px;
+        background: #FFFFFF;
+        border-radius: 3px;
+        font-weight: normal;
+        font-size: 24px;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        justify-self: center;
+        margin-left: calc(50% - 64.5px);
+    }
