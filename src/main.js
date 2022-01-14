@@ -7,6 +7,7 @@ const output = document.querySelector('.card2 .output');
 const inputInfo = document.querySelector('.card1 .inputinfo');
 const outputInfo = document.querySelector('.card2 .outputinfo');
 const convertButton = document.querySelector('.cards img');
+const loadingScreen = document.querySelectorAll('.noloading, .loading')[0];
 
 askServer()
 
@@ -34,9 +35,9 @@ convertButton.addEventListener('click', changePlaces);
 
 function askServer() {
 
-    let loadingScreen = document.querySelectorAll('.noloading, .loading')[0];
     loadingScreen.classList.add('noloading');
     loadingScreen.classList.remove('loading');
+
     let timeOut = setTimeout(showLoadingScreen, 500);
             function showLoadingScreen() { 
                 loadingScreen.classList.remove('noloading');
@@ -61,6 +62,7 @@ function askServer() {
        output.value = input.value;
        inputInfo.innerHTML = `${input.value} ${selectedCurrency1} = ${output.value} ${selectedCurrency2}`;
        outputInfo.innerHTML = inputInfo.innerHTML;
+       clearTimeout(timeOut);
     } else {
         if (isNaN(+(input.value.replace((/,/g), '.')))) {
             input.value = 'не число';
